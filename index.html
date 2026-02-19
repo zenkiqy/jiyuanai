@@ -1,502 +1,146 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <!-- 微信分享卡片关键代码 -->
-<meta property="og:title" content="极元智能 - 让AI替你打工，一人抵十人">
-<meta property="og:description" content="AI智能体创新工场，帮助企业降低90%成本，提升10倍效率">
-<meta property="og:image" content="https://zenkiqy.github.io/jiyuanai/cover.jpg">
-<meta property="og:url" content="https://zenkiqy.github.io/jiyuanai/">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>极元智能 - 让AI替你打工</title>
+    <title>极元智能 - 让AI替你打工，一人抵十人</title>
+    
+    <!-- Open Graph 标签 - 微信分享卡片关键 -->
+    <meta property="og:title" content="极元智能 - 让AI替你打工，一人抵十人">
+    <meta property="og:description" content="AI智能体创新工场，帮助企业降低90%成本，提升10倍效率。提供AI客服、AI内容创作、无人直播等解决方案。">
+    <meta property="og:image" content="https://zenkiqy.github.io/jiyuanai/cover.jpg">
+    <meta property="og:url" content="https://zenkiqy.github.io/jiyuanai/">
+    <meta property="og:type" content="website">
+    
+    <!-- 微信专用 -->
+    <meta name="description" content="AI智能体创新工场，帮助企业降低90%成本，提升10倍效率">
+    <meta itemprop="name" content="极元智能 - 让AI替你打工">
+    <meta itemprop="description" content="AI智能体创新工场，提供AI客服、AI内容创作、无人直播等解决方案">
+    <meta itemprop="image" content="https://zenkiqy.github.io/jiyuanai/cover.jpg">
+    
+    <!-- 苹果设备 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-            background: linear-gradient(135deg, #0a0e27 0%, #1a1f4b 50%, #0f1538 100%);
-            min-height: 100vh;
-            color: #fff;
-            overflow-x: hidden;
-        }
-        
-        .particles {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 0;
-        }
-        
-        .particle {
-            position: absolute;
-            width: 4px; height: 4px;
-            background: rgba(0, 212, 255, 0.5);
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-            box-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
-        }
-        
-        .container {
-            max-width: 480px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .header {
-            text-align: center;
-            padding: 40px 0;
-            position: relative;
-        }
-        
-        .logo-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(0, 102, 255, 0.2));
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            padding: 8px 20px;
-            border-radius: 30px;
-            font-size: 12px;
-            letter-spacing: 2px;
-            color: #00d4ff;
-            margin-bottom: 20px;
-            backdrop-filter: blur(10px);
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
-            50% { box-shadow: 0 0 40px rgba(0, 212, 255, 0.6); }
-        }
-        
-        .main-title {
-            font-size: 32px;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, #fff 0%, #00d4ff 50%, #0066ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .sub-title {
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.6;
-            max-width: 90%;
-            margin: 0 auto;
-        }
-        
-        .highlight { color: #00d4ff; font-weight: 600; }
-        
-        .pain-section {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 100, 100, 0.2);
-            border-radius: 24px;
-            padding: 25px;
-            margin: 30px 0;
-            backdrop-filter: blur(20px);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .section-title {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .pain-list {
-            list-style: none;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .pain-item {
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            font-size: 15px;
-            color: rgba(255, 255, 255, 0.85);
-            line-height: 1.5;
-        }
-        
-        .pain-item:last-child { border-bottom: none; }
-        .pain-dot { color: #ff6b6b; font-weight: bold; min-width: 20px; }
-        
-        .transition-arrow {
-            text-align: center;
-            font-size: 40px;
-            color: #00d4ff;
-            margin: 20px 0;
-            animation: bounce 2s infinite;
-            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .solution-section {
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 102, 255, 0.1));
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            border-radius: 24px;
-            padding: 25px;
-            margin: 30px 0;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 0 40px rgba(0, 212, 255, 0.1);
-        }
-        
-        .solution-grid { display: grid; gap: 15px; margin-top: 20px; }
-        
-        .solution-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 16px;
-            padding: 18px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .solution-card:hover {
-            background: rgba(0, 212, 255, 0.1);
-            transform: translateX(5px);
-            border-color: rgba(0, 212, 255, 0.5);
-        }
-        
-        .solution-icon {
-            width: 50px; height: 50px;
-            background: linear-gradient(135deg, #00d4ff, #0066ff);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            flex-shrink: 0;
-        }
-        
-        .solution-content h4 { font-size: 16px; margin-bottom: 5px; color: #fff; }
-        .solution-content p { font-size: 13px; color: rgba(255, 255, 255, 0.6); }
-        
-        .solution-badge {
-            margin-left: auto;
-            background: linear-gradient(135deg, #00d4ff, #0066ff);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-            white-space: nowrap;
-        }
-        
-        .business-section { margin: 40px 0; }
-        
-        .business-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
-            justify-content: center;
-        }
-        
-        .business-tag {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 10px 18px;
-            border-radius: 30px;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.3s ease;
-        }
-        
-        .business-tag:hover {
-            background: rgba(0, 212, 255, 0.2);
-            border-color: rgba(0, 212, 255, 0.5);
-            transform: translateY(-2px);
-        }
-        
-        .stats-section {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin: 30px 0;
-        }
-        
-        .stat-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 20px 10px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
-        
-        .stat-number {
-            font-size: 28px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #00d4ff, #0066ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: block;
-            margin-bottom: 5px;
-        }
-        
-        .stat-label { font-size: 12px; color: rgba(255, 255, 255, 0.6); }
-        
-        .cta-section {
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(0, 102, 255, 0.2));
-            border: 2px solid rgba(0, 212, 255, 0.5);
-            border-radius: 24px;
-            padding: 30px 25px;
-            text-align: center;
-            margin: 40px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cta-title { font-size: 22px; font-weight: 700; margin-bottom: 15px; position: relative; z-index: 1; }
-        .cta-subtitle { font-size: 14px; color: rgba(255, 255, 255, 0.8); margin-bottom: 25px; position: relative; z-index: 1; }
-        
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #00d4ff, #0066ff);
-            color: #fff;
-            text-decoration: none;
-            padding: 16px 40px;
-            border-radius: 30px;
-            font-size: 16px;
-            font-weight: 700;
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 1;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.6);
-        }
-        
-        .contact-info {
-            margin-top: 20px;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
-            position: relative;
-            z-index: 1;
-        }
-        
-        .contact-info span { display: block; margin: 5px 0; }
-        
-        .footer {
-            text-align: center;
-            padding: 30px 0;
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.4);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 20px;
-        }
-        
-        .company-name { font-size: 16px; font-weight: 600; color: rgba(255, 255, 255, 0.8); margin-bottom: 10px; }
-        
-        @media (max-width: 400px) {
-            .main-title { font-size: 28px; }
-            .solution-card { flex-direction: column; text-align: center; }
-            .solution-badge { margin: 10px 0 0 0; }
-            .stats-section { grid-template-columns: 1fr; }
-        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif;background:linear-gradient(135deg,#0a0e27 0%,#1a1f4b 50%,#0f1538 100%);min-height:100vh;color:#fff;padding:20px}
+        .container{max-width:480px;margin:0 auto}
+        .header{text-align:center;padding:40px 0}
+        .badge{display:inline-block;background:rgba(0,212,255,0.2);border:1px solid rgba(0,212,255,0.4);padding:8px 20px;border-radius:30px;font-size:12px;color:#00d4ff;margin-bottom:20px;animation:pulse 2s infinite}
+        @keyframes pulse{0%,100%{box-shadow:0 0 20px rgba(0,212,255,0.2)}50%{box-shadow:0 0 40px rgba(0,212,255,0.5)}}
+        h1{font-size:34px;font-weight:800;line-height:1.2;margin-bottom:15px;background:linear-gradient(135deg,#fff 0%,#00d4ff 50%,#0066ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .subtitle{font-size:16px;color:rgba(255,255,255,0.8);line-height:1.6}
+        .subtitle span{color:#00d4ff;font-weight:600}
+        .card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:25px;margin:25px 0;backdrop-filter:blur(10px)}
+        .card h2{font-size:22px;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+        .pain{border-color:rgba(255,100,100,0.3);background:linear-gradient(135deg,rgba(255,100,100,0.05),transparent)}
+        .pain h2{color:#ff6b6b}
+        .item{padding:15px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:15px;line-height:1.6}
+        .item:last-child{border-bottom:none}
+        .arrow{text-align:center;font-size:50px;color:#00d4ff;margin:10px 0;animation:bounce 2s infinite}
+        @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+        .solution{border-color:rgba(0,212,255,0.3);background:linear-gradient(135deg,rgba(0,212,255,0.08),rgba(0,102,255,0.05))}
+        .solution h2{color:#00d4ff}
+        .flex{display:flex;align-items:center;gap:15px;padding:18px;background:rgba(255,255,255,0.03);border-radius:16px;margin-bottom:12px;border:1px solid rgba(0,212,255,0.1);transition:all 0.3s}
+        .flex:hover{background:rgba(0,212,255,0.1);border-color:rgba(0,212,255,0.3);transform:translateX(10px)}
+        .icon{width:50px;height:50px;background:linear-gradient(135deg,#00d4ff,#0066ff);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+        .flex div h4{font-size:16px;margin-bottom:4px}
+        .flex div p{font-size:13px;color:rgba(255,255,255,0.6)}
+        .tag{background:linear-gradient(135deg,#00d4ff,#0066ff);padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap}
+        .tags{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:15px}
+        .tags span{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);padding:10px 18px;border-radius:30px;font-size:14px;transition:all 0.3s}
+        .tags span:hover{background:rgba(0,212,255,0.2);border-color:rgba(0,212,255,0.5);transform:translateY(-3px)}
+        .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:30px 0}
+        .stat{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:25px 10px;text-align:center;transition:all 0.3s}
+        .stat:hover{border-color:rgba(0,212,255,0.5);transform:scale(1.05)}
+        .stat-num{font-size:32px;font-weight:800;background:linear-gradient(135deg,#00d4ff,#0066ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block;margin-bottom:8px}
+        .stat-label{font-size:13px;color:rgba(255,255,255,0.7)}
+        .cta{background:linear-gradient(135deg,rgba(0,212,255,0.15),rgba(0,102,255,0.15));border:2px solid rgba(0,212,255,0.5);border-radius:24px;padding:35px 25px;text-align:center;margin:35px 0;position:relative;overflow:hidden}
+        .cta::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);animation:shine 3s infinite}
+        @keyframes shine{0%{left:-100%}100%{left:100%}}
+        .cta h3{font-size:26px;margin-bottom:15px;position:relative;z-index:1}
+        .cta p{font-size:15px;color:rgba(255,255,255,0.9);margin-bottom:25px;position:relative;z-index:1;line-height:1.6}
+        .cta-btn{background:linear-gradient(135deg,#00d4ff,#0066ff);color:#fff;border:none;padding:18px 50px;border-radius:30px;font-size:18px;font-weight:700;cursor:pointer;width:100%;max-width:300px;box-shadow:0 10px 30px rgba(0,212,255,0.4);transition:all 0.3s;position:relative;z-index:1}
+        .cta-btn:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(0,212,255,0.6)}
+        .cta-contact{margin-top:25px;font-size:15px;color:rgba(255,255,255,0.8);position:relative;z-index:1}
+        .cta-contact a{color:#00d4ff;text-decoration:none;font-weight:600}
+        .footer{text-align:center;padding:40px 0 30px;font-size:13px;color:rgba(255,255,255,0.5);border-top:1px solid rgba(255,255,255,0.1);margin-top:20px}
+        .footer strong{display:block;font-size:18px;color:rgba(255,255,255,0.9);margin-bottom:10px}
+        @media screen and (max-width:480px){h1{font-size:28px}.card{padding:20px;margin:20px 0}.flex{flex-direction:column;text-align:center}.tag{margin-top:10px;margin-left:0}.stats{grid-template-columns:1fr;gap:10px}}
     </style>
 </head>
 <body>
-    <div class="particles" id="particles"></div>
     <div class="container">
-        <header class="header">
-            <div class="logo-badge">🚀 AI智能体创新工场</div>
-            <h1 class="main-title">让AI替你打工<br>一人抵十人</h1>
-            <p class="sub-title">
-                清远市极元智能科技<br>
-                <span class="highlight">不是卖软件，是送你一支24小时不下班的AI团队</span>
-            </p>
-        </header>
+        <div class="header">
+            <div class="badge">🚀 AI智能体创新工场</div>
+            <h1>让AI替你打工<br>一人抵十人</h1>
+            <p class="subtitle">清远市极元智能科技<br><span>不是卖软件，是送你一支24小时不下班的AI团队</span></p>
+        </div>
         
-        <section class="pain-section">
-            <h2 class="section-title">
-                <span style="font-size: 24px;">😫</span>
-                你是不是也这样？
-            </h2>
-            <ul class="pain-list">
-                <li class="pain-item">
-                    <span class="pain-dot">✕</span>
-                    <span><strong>人力成本高：</strong>客服、文案、设计、运营，样样都要人，工资社保压死人</span>
-                </li>
-                <li class="pain-item">
-                    <span class="pain-dot">✕</span>
-                    <span><strong>内容产出慢：</strong>日更10篇？团队加班也做不到，热点都凉了</span>
-                </li>
-                <li class="pain-item">
-                    <span class="pain-dot">✕</span>
-                    <span><strong>流量贵如金：</strong>投广告烧钱，转化率却越来越低，ROI算不过来</span>
-                </li>
-                <li class="pain-item">
-                    <span class="pain-dot">✕</span>
-                    <span><strong>技术门槛高：</strong>想智能化，但不懂AI，外包又怕被坑，进退两难</span>
-                </li>
-            </ul>
-        </section>
+        <div class="card pain">
+            <h2>😫 你是不是也这样？</h2>
+            <div class="item"><strong style="color:#ff6b6b">✕</strong> <b>人力成本高：</b>客服、文案、设计、运营样样都要人，工资社保压死人</div>
+            <div class="item"><strong style="color:#ff6b6b">✕</strong> <b>内容产出慢：</b>日更10篇？团队加班也做不到，热点都凉了</div>
+            <div class="item"><strong style="color:#ff6b6b">✕</strong> <b>流量贵如金：</b>投广告烧钱，转化率却越来越低，ROI算不过来</div>
+            <div class="item"><strong style="color:#ff6b6b">✕</strong> <b>技术门槛高：</b>想智能化，但不懂AI，外包又怕被坑</div>
+        </div>
         
-        <div class="transition-arrow">⇩</div>
+        <div class="arrow">⇩</div>
         
-        <section class="solution-section">
-            <h2 class="section-title" style="color: #00d4ff;">
-                <span style="font-size: 24px;">💡</span>
-                极元智能给你答案
-            </h2>
-            <div class="solution-grid">
-                <div class="solution-card">
-                    <div class="solution-icon">🤖</div>
-                    <div class="solution-content">
-                        <h4>AI智能体替代</h4>
-                        <p>客服、文案、设计全流程AI化</p>
-                    </div>
-                    <div class="solution-badge">-90%成本</div>
-                </div>
-                <div class="solution-card">
-                    <div class="solution-icon">⚡</div>
-                    <div class="solution-content">
-                        <h4>AI批量创作</h4>
-                        <p>日更百篇高质量内容不是梦</p>
-                    </div>
-                    <div class="solution-badge">10倍+效率</div>
-                </div>
-                <div class="solution-card">
-                    <div class="solution-icon">📺</div>
-                    <div class="solution-content">
-                        <h4>AI无人直播</h4>
-                        <p>7×24小时自动带货获客</p>
-                    </div>
-                    <div class="solution-badge">+300%流量</div>
-                </div>
-                <div class="solution-card">
-                    <div class="solution-icon">🔧</div>
-                    <div class="solution-content">
-                        <h4>端到端定制</h4>
-                        <p>从规划到运维，即开即用</p>
-                    </div>
-                    <div class="solution-badge">0门槛</div>
-                </div>
+        <div class="card solution">
+            <h2>💡 极元智能给你答案</h2>
+            <div class="flex">
+                <div class="icon">🤖</div>
+                <div><h4>AI智能体替代</h4><p>客服、文案、设计全流程AI化</p></div>
+                <div class="tag">-90%成本</div>
             </div>
-        </section>
+            <div class="flex">
+                <div class="icon">⚡</div>
+                <div><h4>AI批量创作</h4><p>日更百篇高质量内容不是梦</p></div>
+                <div class="tag">10倍+效率</div>
+            </div>
+            <div class="flex">
+                <div class="icon">📺</div>
+                <div><h4>AI无人直播</h4><p>7×24小时自动带货获客</p></div>
+                <div class="tag">+300%流量</div>
+            </div>
+            <div class="flex">
+                <div class="icon">🔧</div>
+                <div><h4>端到端定制</h4><p>从规划到运维，即开即用</p></div>
+                <div class="tag">0门槛</div>
+            </div>
+        </div>
         
-        <section class="business-section">
-            <h2 class="section-title" style="justify-content: center;">
-                <span>🎯</span>
-                覆盖八大场景
-            </h2>
-            <div class="business-tags">
-                <div class="business-tag">🏭 智能制造</div>
-                <div class="business-tag">🛒 智慧零售</div>
-                <div class="business-tag">🎓 智慧教育</div>
-                <div class="business-tag">🎬 AI短剧</div>
-                <div class="business-tag">🌾 乡镇振兴</div>
-                <div class="business-tag">🚀 一人公司</div>
-                <div class="business-tag">📹 无人直播</div>
-                <div class="business-tag">✂️ 智能剪辑</div>
+        <div style="text-align:center;margin:30px 0">
+            <h3 style="font-size:22px;margin-bottom:20px">🎯 覆盖八大业务场景</h3>
+            <div class="tags">
+                <span>🏭 智能制造</span><span>🛒 智慧零售</span><span>🎓 智慧教育</span><span>🎬 AI短剧</span>
+                <span>🌾 乡镇振兴</span><span>🚀 一人公司</span><span>📹 无人直播</span><span>✂️ 智能剪辑</span>
             </div>
-        </section>
+        </div>
         
-        <section class="stats-section">
-            <div class="stat-card">
-                <span class="stat-number">90%</span>
-                <span class="stat-label">成本降低</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-number">10x</span>
-                <span class="stat-label">效率提升</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-number">24h</span>
-                <span class="stat-label">全天候</span>
-            </div>
-        </section>
+        <div class="stats">
+            <div class="stat"><span class="stat-num">90%</span><span class="stat-label">成本降低</span></div>
+            <div class="stat"><span class="stat-num">10x</span><span class="stat-label">效率提升</span></div>
+            <div class="stat"><span class="stat-num">24h</span><span class="stat-label">全天候</span></div>
+        </div>
         
-        <section class="cta-section">
-            <h3 class="cta-title">🎁 限时福利</h3>
-            <p class="cta-subtitle">扫码免费领取《AI智能体落地白皮书》<br>+ 1对1业务诊断（价值¥3000）</p>
-            <button class="cta-button" onclick="alert('请添加微信：19066214916 或拨打电话：0763-3314916')">立即领取方案</button>
-            <div class="contact-info">
-                <span>📞 19066214916</span>
-                <span>☎️ 0763-3314916</span>
+        <div class="cta">
+            <h3>🎁 限时福利</h3>
+            <p>扫码免费领取《AI智能体落地白皮书》<br>+ 1对1业务诊断（价值¥3000）</p>
+            <button class="cta-btn" onclick="window.location.href='tel:19066214916'">立即领取方案</button>
+            <div class="cta-contact">
+                📞 <a href="tel:19066214916">19066214916</a><br>
+                ☎️ <a href="tel:0763-3314916">0763-3314916</a>
             </div>
-        </section>
+        </div>
         
-        <footer class="footer">
-            <div class="company-name">清远市极元智能科技有限公司</div>
+        <div class="footer">
+            <strong>清远市极元智能科技有限公司</strong>
             <p>您的AI赋能伙伴 · 共创智能未来</p>
-            <p style="margin-top: 10px;">从规划咨询 → 定制开发 → 部署运维 · 端到端服务</p>
-        </footer>
+            <p style="margin-top:10px">从规划咨询 → 定制开发 → 部署运维 · 端到端服务</p>
+        </div>
     </div>
-    
-    <script>
-        const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 30; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 20 + 's';
-            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
-            particlesContainer.appendChild(particle);
-        }
-        
-        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-        
-        document.querySelectorAll('.solution-card, .pain-item, .business-tag, .stat-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'all 0.6s ease';
-            observer.observe(el);
-        });
-        
-        document.querySelectorAll('.solution-card').forEach(card => {
-            card.addEventListener('click', function() {
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => { this.style.transform = 'scale(1)'; }, 150);
-            });
-        });
-    </script>
 </body>
-
 </html>
